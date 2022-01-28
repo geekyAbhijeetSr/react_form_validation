@@ -2,22 +2,24 @@ import { useState, useRef, useEffect } from 'react'
 import { Input, Button } from '../../components'
 
 function Login() {
-
+	// stats
 	const [formValues, setFormValues] = useState({
 		email: '',
 		password: '',
 	})
-
 	const [formErrors, setFormErrors] = useState({})
 	const [isSubmit, setIsSubmit] = useState(false)
 
+	// refs
 	const emailRef = useRef()
 	const passwordRef = useRef()
 
+	// focus on first input on load
 	useEffect(() => {
 		emailRef.current.focus()
 	}, [])
 
+	// handle input change
 	const handleChange = e => {
 		setFormValues({
 			...formValues,
@@ -25,6 +27,7 @@ function Login() {
 		})
 	}
 
+	// handle submit
 	const handleSubmit = e => {
 		e.preventDefault()
 		const errors = validate(formValues)
@@ -37,6 +40,7 @@ function Login() {
 		}
 	}
 
+	// function to validate inputs
 	const validate = values => {
 		const errors = {}
 		const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i
@@ -55,6 +59,7 @@ function Login() {
 		return errors
 	}
 
+	// function to focus on first input with error
 	const focusInput = (errors) => {
 		if (errors.email) {
 			emailRef.current.focus()
